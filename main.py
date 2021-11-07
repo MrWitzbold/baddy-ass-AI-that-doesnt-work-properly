@@ -83,6 +83,7 @@ def train(file_to_read, neurons, weights, iterations):
             else:
                 weights[random.randint(0, len(weights)-1)] += random_difference*100
             generated_text += machine_letter
+        save_point("neurons.txt", neurons, weights)
         if i+1 >= len(file):
             return generated_text
     return generated_text
@@ -122,6 +123,6 @@ weights = weights_aux
 print(neurons)
 print(weights)
 
-generated_text = train("book_to_read.txt", neurons, weights, 50000)
-save_point("neurons.txt", neurons, weights)
-print(generated_text)
+while True:
+    generated_text = train("book_to_read.txt", neurons, weights, 500000).replace(",,", "").replace(".", ".").replace("..", "").replace(",.", ".").replace(".,", ",")
+    print(generated_text)
